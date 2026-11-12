@@ -1,0 +1,7 @@
+# Bleibt lokal und darf NICHT auf GitHub landen:
+# Originalfotos (mit GPS-Daten), Antworten im Klartext, der Schlüssel
+# und der QR-Code (enthält den Schlüssel).
+# Veröffentlicht wird nur der verschlüsselte Inhalt in docs/.
+inhalt/
+qr-code.png
+.DS_Store

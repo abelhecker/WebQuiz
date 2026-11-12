@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light">
+  <title>Quiz</title>
+  <link rel="stylesheet" href="stil.css">
+</head>
+<body>
+  <main>
+    <!-- Hinweis, wenn der Schlüssel aus dem QR-Code fehlt oder etwas nicht lädt -->
+    <section id="ansicht-hinweis" hidden>
+      <p id="hinweis-text" class="hinweis"></p>
+    </section>
+
+    <!-- Startseite: Titel und Brief -->
+    <section id="ansicht-brief" hidden>
+      <h1 id="brief-titel"></h1>
+      <div id="brief-text" class="fliesstext"></div>
+      <button id="knopf-start" class="knopf" type="button">Quiz starten</button>
+    </section>
+
+    <!-- Eine Frage -->
+    <section id="ansicht-frage" hidden>
+      <p id="fortschritt" class="fortschritt"></p>
+      <img id="foto" class="foto" alt="Foto des gesuchten Ortes">
+      <p id="frage-text" class="frage"></p>
+      <form id="formular" autocomplete="off">
+        <label for="eingabe">Deine Antwort</label>
+        <input id="eingabe" type="text" autocapitalize="off" autocorrect="off"
+               autocomplete="off" spellcheck="false" enterkeyhint="done">
+        <button class="knopf" type="submit">Antwort prüfen</button>
+      </form>
+      <p id="meldung" class="meldung" role="status" aria-live="polite"></p>
+      <button id="knopf-brief" class="textknopf" type="button">Brief noch einmal lesen</button>
+    </section>
+
+    <!-- Nach der richtigen Antwort: Foto zur Auflösung -->
+    <section id="ansicht-loesung" hidden>
+      <p id="loesung-fortschritt" class="fortschritt"></p>
+      <h2 class="richtig">Richtig!</h2>
+      <img id="loesung-foto" class="foto" alt="Foto zur Auflösung">
+      <button id="knopf-weiter" class="knopf" type="button">Weiter</button>
+    </section>
+
+    <!-- Schluss -->
+    <section id="ansicht-ende" hidden>
+      <h1 id="ende-titel"></h1>
+      <div id="ende-text" class="fliesstext"></div>
+    </section>
+
+    <noscript><p>Für dieses Quiz muss JavaScript im Browser erlaubt sein.</p></noscript>
+  </main>
+
+  <script src="quiz.js"></script>
+</body>
+</html>

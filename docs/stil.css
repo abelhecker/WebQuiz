@@ -1,0 +1,180 @@
+:root {
+  --papier: #f5efe3;
+  --blatt: #fffdf8;
+  --tinte: #2c2622;
+  --leise: #7a6f64;
+  --akzent: #9c3d2a;
+  --akzent-dunkel: #7c2e1e;
+  --linie: #e2d8c6;
+  --gruen: #2f6b45;
+  --schrift-brief: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --schrift: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--papier);
+  color: var(--tinte);
+  font-family: var(--schrift);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+main {
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+section {
+  background: var(--blatt);
+  border: 1px solid var(--linie);
+  border-radius: 14px;
+  padding: 28px 22px 26px;
+  box-shadow: 0 2px 14px rgba(60, 40, 20, 0.07);
+}
+
+[hidden] { display: none !important; }
+
+h1 {
+  font-family: var(--schrift-brief);
+  font-size: 1.9rem;
+  line-height: 1.2;
+  font-weight: 600;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+
+.fliesstext {
+  font-family: var(--schrift-brief);
+  font-size: 1.12rem;
+  line-height: 1.65;
+}
+
+.fliesstext p {
+  margin: 0 0 1em;
+  white-space: pre-line;
+}
+
+.knopf {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--akzent);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.knopf:active { background: var(--akzent-dunkel); }
+
+.knopf:focus-visible,
+.textknopf:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(156, 61, 42, 0.35);
+  outline-offset: 2px;
+}
+
+.textknopf {
+  display: block;
+  margin: 22px auto 0;
+  padding: 8px 10px;
+  border: 0;
+  background: none;
+  color: var(--leise);
+  font: inherit;
+  font-size: 0.92rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.fortschritt {
+  margin: 0 0 14px;
+  color: var(--leise);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.foto {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  background: var(--linie);
+}
+
+/* Platz freihalten, solange das Foto noch lädt */
+.foto.laedt { aspect-ratio: 4 / 3; }
+
+.frage {
+  font-family: var(--schrift-brief);
+  font-size: 1.3rem;
+  line-height: 1.35;
+  margin: 20px 0 18px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--leise);
+  font-size: 0.9rem;
+}
+
+input {
+  display: block;
+  width: 100%;
+  padding: 13px 14px;
+  border: 1.5px solid var(--linie);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--tinte);
+  font: inherit;
+  font-size: 1.1rem; /* mindestens 16px, sonst zoomt iOS beim Antippen */
+}
+
+.meldung {
+  min-height: 1.55em;
+  margin: 14px 0 0;
+  color: var(--akzent);
+  font-weight: 600;
+}
+
+.richtig {
+  margin: 0 0 16px;
+  color: var(--gruen);
+  font-family: var(--schrift-brief);
+  font-size: 1.7rem;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.hinweis {
+  margin: 0;
+  font-family: var(--schrift-brief);
+  font-size: 1.15rem;
+  text-align: center;
+}
+
+.wackeln { animation: wackeln 0.35s; }
+
+@keyframes wackeln {
+  20% { transform: translateX(-7px); }
+  40% { transform: translateX(7px); }
+  60% { transform: translateX(-5px); }
+  80% { transform: translateX(5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wackeln { animation: none; }
+}
