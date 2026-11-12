@@ -178,3 +178,17 @@ input {
 @media (prefers-reduced-motion: reduce) {
   .wackeln { animation: none; }
 }
+
+.fliesstext a {
+  color: var(--akzent);
+  font-weight: 600;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.fliesstext hr {
+  width: 40%;
+  margin: 1.6em auto;
+  border: 0;
+  border-top: 1px solid var(--linie);
+}

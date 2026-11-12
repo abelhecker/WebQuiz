@@ -71,6 +71,28 @@ function istRichtig(quiz, nummer, eingabe) {
   return quiz.fragen[nummer].antworten.indexOf(antwortHash(quiz.salz, nummer, eingabe)) !== -1;
 }
 
+// ---- Links in Brief und Schlusstext ---------------------------------------
+// Zerlegt einen Text in normale Stücke und Links. Zwei Schreibweisen:
+//   https://example.org            -> die Adresse selbst wird anklickbar
+//   [Restaurant](https://...)      -> das Wort "Restaurant" wird anklickbar
+function zerlegeLinks(text) {
+  var muster = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|https?:\/\/[^\s<>"]+/g;
+  var teile = [], ende = 0, treffer;
+  while ((treffer = muster.exec(text))) {
+    var ganz = treffer[0], adresse = treffer[2] || ganz, name = treffer[1] || ganz;
+    if (!treffer[2]) {
+      // Satzzeichen direkt hinter einer nackten Adresse gehören nicht zum Link
+      adresse = name = ganz.replace(/[).,;:!?]+$/, '');
+      muster.lastIndex = treffer.index + adresse.length;
+    }
+    if (treffer.index > ende) teile.push({ text: text.slice(ende, treffer.index) });
+    teile.push({ text: name, adresse: adresse });
+    ende = muster.lastIndex;
+  }
+  if (ende < text.length) teile.push({ text: text.slice(ende) });
+  return teile;
+}
+
 // ---- Entschlüsselung ------------------------------------------------------
 // Dateiformat (siehe build.py): 12 Byte Nonce, danach AES-GCM-Chiffrat.
 function hexZuBytes(hex) {
@@ -184,8 +206,20 @@ async function starteQuiz() {
     element.textContent = '';
     text.split(/\n\s*\n/).forEach(function (absatz) {
       if (!absatz.trim()) return;
+      if (absatz.trim() === '---') {
+        element.appendChild(document.createElement('hr'));
+        return;
+      }
       var p = document.createElement('p');
-      p.textContent = absatz.trim();
+      zerlegeLinks(absatz.trim()).forEach(function (teil) {
+        if (!teil.adresse) { p.appendChild(document.createTextNode(teil.text)); return; }
+        var a = document.createElement('a');
+        a.href = teil.adresse;
+        a.textContent = teil.text;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        p.appendChild(a);
+      });
       element.appendChild(p);
     });
   }
